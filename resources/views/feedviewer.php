@@ -12,7 +12,7 @@
     <body>
         <div class="container">
             <div id="feedviewer">
-                <h2>Feed content</h2>
+                <h2>Feed Viewer</h2>
                 <div class="form-group">
                     <input type="text" v-model="url" class="form-control" placeholder="Search" v-on:keyup.enter="searchFeed">
                     {{error}}
@@ -35,6 +35,7 @@
                 <div class="row">
                     <button v-if ="feedResultCount > feedData.length" v-on:click="showMore" >Show More</button>
                 </div>
+                <div><hr></div>
             </div>
         </div>
     <script src="js/app.js"></script>

@@ -15,6 +15,7 @@
                 <h2>Feed content</h2>
                 <div class="form-group">
                     <input type="text" v-model="url" class="form-control" placeholder="Search" v-on:keyup.enter="searchFeed">
+                    {{error}}
                 </div>
                 <button type="button" class="btn btn-default" v-on:click="searchFeed">Search</button>
                 <div v-for="item in feedData">

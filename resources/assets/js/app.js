@@ -26,10 +26,21 @@ const app = new Vue({
     data: {
         url: "",
         feedData: [],
-        feedResultCount: 0
+        feedResultCount: 0,
+        error: ""
     },
     methods: {
         searchFeed: function(e) {
+            if (!this.url) {
+                this.error = "Please enter URL";
+                return false;
+            }
+
+            if (this.url.indexOf("http://pf.tradetracker.net/?aid=1&type=xml&encoding=utf-8")) {
+                this.error = "Please enter proper Trade Tracker URL";
+                return false;
+            }
+
             feedResult = [];
             this.feedResultCount = 0;
             this.feedData = [];

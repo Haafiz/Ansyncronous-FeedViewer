@@ -6,6 +6,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
+use React\EventLoop\Factory as ReactFactory;
+use \React\Socket\Server;
 use App\FeedReader;
 
 class WSocketServer extends Command
@@ -45,18 +47,35 @@ class WSocketServer extends Command
         $port = intval($this->option('port'));
 
         $this->info("Starting chat web socket server on port " . $port);
+        $loop = ReactFactory::create();
 
-        $server = IoServer::factory(
+        $socket = new Server($loop);
+        $socket->listen($port, '0.0.0.0');
+
+
+        $server = new IoServer(
             new HttpServer(
                 new WsServer(
-                    new FeedReader()
+                    new FeedReader($loop)
                 )
             ),
-            $port,
-            '0.0.0.0'
+            $socket,
+            $loop
         );
 
         $server->run();
+
+        // $server = IoServer::factory(
+        //     new HttpServer(
+        //         new WsServer(
+        //             new FeedReader($loop)
+        //         )
+        //     ),
+        //     $port,
+        //     '0.0.0.0'
+        // );
+        //
+        // $server->run();
     }
 
     /**

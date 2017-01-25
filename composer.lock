@@ -4,9 +4,43 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1e13c66d758fba3135ed02e4a86fe96e",
-    "content-hash": "a50e5fb218adee9ab13f3b97335016d8",
+    "hash": "081af96570ef9f85946fb9c6ae47156d",
+    "content-hash": "b6a4a794134ba1b07db500af6a053643",
     "packages": [
+        {
+            "name": "asyncphp/doorman",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/asyncphp/doorman.git",
+                "reference": "144561a38bf9b663b27af606b4562b3a5b6e191c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/asyncphp/doorman/zipball/144561a38bf9b663b27af606b4562b3a5b6e191c",
+                "reference": "144561a38bf9b663b27af606b4562b3a5b6e191c",
+                "shasum": ""
+            },
+            "require": {
+                "jeremeamia/superclosure": "^2.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AsyncPHP\\Doorman\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Child process management",
+            "time": "2015-12-06 21:13:18"
+        },
         {
             "name": "cboden/ratchet",
             "version": "v0.3.6",
@@ -1038,57 +1072,6 @@
                 "php"
             ],
             "time": "2016-12-06 11:30:35"
-        },
-        {
-            "name": "orchid/socket",
-            "version": "1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/TheOrchid/Socket.git",
-                "reference": "6770a19b8382265e3a803f4e22c26ace35f1cf76"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/TheOrchid/Socket/zipball/6770a19b8382265e3a803f4e22c26ace35f1cf76",
-                "reference": "6770a19b8382265e3a803f4e22c26ace35f1cf76",
-                "shasum": ""
-            },
-            "require": {
-                "cboden/ratchet": "^0.3.5",
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Orchid\\Socket\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "tabuna",
-                    "email": "bliz48rus@gmail.com"
-                }
-            ],
-            "description": "Simple WebSockets for Laravel",
-            "keywords": [
-                "Socket",
-                "framework",
-                "laravel",
-                "php",
-                "server",
-                "web",
-                "websocket"
-            ],
-            "time": "2016-08-24 08:37:11"
         },
         {
             "name": "paragonie/random_compat",
@@ -2651,6 +2634,57 @@
                 "object graph"
             ],
             "time": "2016-10-31 17:19:45"
+        },
+        {
+            "name": "orchid/socket",
+            "version": "1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheOrchid/Socket.git",
+                "reference": "6770a19b8382265e3a803f4e22c26ace35f1cf76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheOrchid/Socket/zipball/6770a19b8382265e3a803f4e22c26ace35f1cf76",
+                "reference": "6770a19b8382265e3a803f4e22c26ace35f1cf76",
+                "shasum": ""
+            },
+            "require": {
+                "cboden/ratchet": "^0.3.5",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchid\\Socket\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "tabuna",
+                    "email": "bliz48rus@gmail.com"
+                }
+            ],
+            "description": "Simple WebSockets for Laravel",
+            "keywords": [
+                "Socket",
+                "framework",
+                "laravel",
+                "php",
+                "server",
+                "web",
+                "websocket"
+            ],
+            "time": "2016-08-24 08:37:11"
         },
         {
             "name": "phpdocumentor/reflection-common",

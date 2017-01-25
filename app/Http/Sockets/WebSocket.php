@@ -3,19 +3,23 @@
 use Orchid\Socket\BaseSocketListener;
 use Ratchet\ConnectionInterface;
 
-class WebSocket extends BaseSocketListener {
+class WebSocket extends BaseSocketListener
+{
 
- protected $clients;
+    protected $clients;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->clients = new \SplObjectStorage;
     }
 
-    public function onOpen(ConnectionInterface $conn) {
+    public function onOpen(ConnectionInterface $conn)
+    {
         $this->clients->attach($conn);
     }
 
-    public function onMessage(ConnectionInterface $from, $msg) {
+    public function onMessage(ConnectionInterface $from, $msg)
+    {
         foreach ($this->clients as $client) {
             if ($from != $client) {
                 $client->send($msg);
@@ -23,12 +27,13 @@ class WebSocket extends BaseSocketListener {
         }
     }
 
-    public function onClose(ConnectionInterface $conn) {
+    public function onClose(ConnectionInterface $conn)
+    {
         $this->clients->detach($conn);
     }
 
-    public function onError(ConnectionInterface $conn, \Exception $e) {
+    public function onError(ConnectionInterface $conn, \Exception $e)
+    {
         $conn->close();
     }
-
 }

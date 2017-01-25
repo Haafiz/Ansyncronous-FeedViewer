@@ -2,15 +2,18 @@
 
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use AsyncPHP\Doorman\Manager\SynchronousManager;
+use AsyncPHP\Doorman\Manager\ProcessManager;
+use AsyncPHP\Doorman\Task\ProcessCallbackTask;
 
 class FeedReader implements MessageComponentInterface
 {
 
     protected $conn;
 
-    public function __construct()
+    public function __construct($loop)
     {
-        $this->conn = null;
+        $this->loop = $loop;
     }
 
     public function onOpen(ConnectionInterface $conn)
@@ -26,19 +29,40 @@ class FeedReader implements MessageComponentInterface
         echo sprintf('Connection %d sending message "%s"' . "\n", $from->resourceId, $msg);
 
         $url = $msg;
-        //$url = "http://pf.tradetracker.net/?aid=1&type=xml&encoding=utf-8&fid=251713&categoryType=2&additionalType=2&limit=2";
         $file = $url;
         $reader = new \XMLReader();
         $reader->open($file);
-        while ($reader->read() && $reader->name !== 'product');
+        while ($reader->read() && $reader->name !== 'product') {
+        }
 
         $doc = new \DOMDocument;
+        $i = 0;
         while ($reader->name == 'product') {
             $productNode = simplexml_import_dom($doc->importNode($reader->expand(), true));
             $productArr = $this->getProductArr($productNode);
-            echo $productArr['name'];
-            $this->conn->send(json_encode($productArr));
-            $reader->next('product');
+
+            $conn = $this->conn;
+
+            $this->loop->nextTick(function () use ($conn, $productArr) {
+                $conn->send(json_encode($productArr));
+            });
+            $this->loop->nextTick(function () use ($reader) {
+                $reader->next('product');
+            });
+
+            while ($this->loop->tick()) {
+                usleep(500);
+            }
+
+            /**
+             * stop sending data to browser that user can't utilize and which
+             * can consume lot of memory in browser
+             */
+            if ($i > 5000) {
+                break;
+            }
+
+            $i++;
         }
 
         $reader->close();
@@ -61,7 +85,7 @@ class FeedReader implements MessageComponentInterface
         foreach ($categories->children() as $category) {
             $categoriesArr[] = (string)$category;
         }
-        
+
         $product['categories'] = implode(", ", $categoriesArr);
 
         return $product;

@@ -26,7 +26,7 @@ class FeedReader implements MessageComponentInterface
         echo sprintf('Connection %d sending message "%s"' . "\n", $from->resourceId, $msg);
 
         $url = $msg;
-        $url = "http://pf.tradetracker.net/?aid=1&type=xml&encoding=utf-8&fid=251713&categoryType=2&additionalType=2&limit=2";
+        //$url = "http://pf.tradetracker.net/?aid=1&type=xml&encoding=utf-8&fid=251713&categoryType=2&additionalType=2&limit=2";
         $file = $url;
         $reader = new \XMLReader();
         $reader->open($file);
@@ -36,6 +36,7 @@ class FeedReader implements MessageComponentInterface
         while ($reader->name == 'product') {
             $productNode = simplexml_import_dom($doc->importNode($reader->expand(), true));
             $productArr = $this->getProductArr($productNode);
+            echo $productArr['name'];
             $this->conn->send(json_encode($productArr));
             $reader->next('product');
         }
@@ -55,12 +56,14 @@ class FeedReader implements MessageComponentInterface
         $product['imageURL'] = current($productNode->imageURL);
         $product['description'] = (string)current($productNode->description);
         $categories = $productNode->categories;
-        //var_dump($categories);
+
+        $categoriesArr = [];
         foreach ($categories->children() as $category) {
             $categoriesArr[] = (string)$category;
         }
+        
         $product['categories'] = implode(", ", $categoriesArr);
-        //$productNode->getAttribute('currency');
+
         return $product;
     }
 

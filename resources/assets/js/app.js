@@ -16,8 +16,16 @@ Vue.component('example', require('./components/Example.vue'));
 /**
  * Create websocket and define limit to show first time and then every time user click show more
  */
+
 const url = 'ws://localhost:9090';
 const connection = new WebSocket(url);
+
+if (!connection) {
+    document.getElementById('socketError').style.display = "block";
+    exit;
+}
+
+
 const limit = 10;
 
 var feedResult = [];

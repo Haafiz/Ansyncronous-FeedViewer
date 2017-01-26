@@ -30,11 +30,13 @@ class FeedReader implements MessageComponentInterface
 
         $url = $msg;
         $file = $url;
+        /* Use XML Reader and and start reading till reach prouct node */
         $reader = new \XMLReader();
         $reader->open($file);
         while ($reader->read() && $reader->name !== 'product') {
         }
 
+        /* Read every product ndde and send it back to socket client using event loop */
         $doc = new \DOMDocument;
         $i = 0;
         while ($reader->name == 'product') {
@@ -68,6 +70,12 @@ class FeedReader implements MessageComponentInterface
         $reader->close();
     }
 
+    /**
+     * Get Associative array of product based on product node
+     *
+     * @param $productNode product xml node
+     * @return $product associative array
+     */
     private function getProductArr($productNode)
     {
         $product = [];

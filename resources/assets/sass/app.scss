@@ -7,3 +7,11 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.error{
+    display:none;
+    background-color:yellow;
+    color:red;
+    font-weight: bold;
+    padding: 3px;
+}

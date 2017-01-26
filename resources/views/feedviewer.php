@@ -13,6 +13,9 @@
         <div class="container">
             <div id="feedviewer">
                 <h2>Feed Viewer</h2>
+                <div class="error" id="socketError">
+                    Connection can't be established with web socket run , websocket using `php artisan wsocket:serve`"
+                </div>
                 <div class="form-group">
                     <input type="text" v-model="url" class="form-control" placeholder="URL" v-on:keyup.enter="searchFeed">
                     {{error}}

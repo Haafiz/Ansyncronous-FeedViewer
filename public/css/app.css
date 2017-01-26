@@ -7688,4 +7688,12 @@ button.close {
   }
 }
 
+.error {
+  display: none;
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+  padding: 3px;
+}
+
 /*# sourceMappingURL=app.css.map */

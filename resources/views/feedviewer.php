@@ -14,10 +14,10 @@
             <div id="feedviewer">
                 <h2>Feed Viewer</h2>
                 <div class="form-group">
-                    <input type="text" v-model="url" class="form-control" placeholder="Search" v-on:keyup.enter="searchFeed">
+                    <input type="text" v-model="url" class="form-control" placeholder="URL" v-on:keyup.enter="searchFeed">
                     {{error}}
                 </div>
-                <button type="button" class="btn btn-default" v-on:click="searchFeed">Search</button>
+                <button type="button" class="btn btn-default" v-on:click="searchFeed">Fetch Feeds</button>
                 <div v-for="item in feedData">
                     <div class="row">
                         <div class="col-sm-2"><b>Product ID:</b> {{item.productID}}</div>

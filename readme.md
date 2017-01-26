@@ -1,27 +1,29 @@
-# Laravel PHP Framework
+# Feed Viewer
+Feed Viewer take Trade tracker's URL from user and send that URL through websocket to websocket server running from same code base. Server parse big XML file without saving it anywhere or without fetching whole file using XMLReader and while reading every product node, it sends that product's record to client side through same web socket connection.
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Normally PHP is not asynchronous so normally PHP waits for completion of script and then send data through sockets, that can keep socket waiting for all records to be completed which can kill the purpose. So for that reason a composer package `react/event-loop` is used, that make sure that it can perform tasks asynchronously and while server is reading XML file, client can receive data at that time side by side.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+# Setup
+This application use Laravel MVC framework for that purpose, so here is how you can set it up.
+Extract all the files.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Run `composer install`. If you don't have composer already installed, then first install `composer`.
+Make sure that `/storage` and `bootstrap/cache` directories are writable.
 
-## Official Documentation
+run `composer dump-autoload` .
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+For front-end stuff,I am using `vue.js`, `bootstrap-sass`, `gulp` and few other dependencies already in package.json file. So run `npm install`.
 
-## Contributing
+As I am using `Sass` and I am using `ES6` constructs, so I am using Gulp for running some script and compiling Sass and ES6 to ES5.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+# Usage:
 
-## Security Vulnerabilities
+To run it you first need to run your HTTP server and then you need to run socket server using following command:
+`php artisan wsocket:serve`. You will need to keep that terminal window open, otherwise you will need to send it to backgroun process.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Then go to `http://{yourserverurl and path to project}/public`. Enter URL and hit enter or press `Fetch Feeds` button.
 
-## License
+It will start fetching feeds continuously and will first who 20 records. Then on clicking 'Show more' button it will show 20 more in no time as it is already getting data.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+# More
+There can be more things done in this but due to time limitation at my end that's all I could do for now in a test task.

@@ -20,8 +20,7 @@ As I am using `Sass` and I am using `ES6` constructs, so I am using Gulp for run
 
 To run it you first need to run your HTTP server and then you need to run socket server using following command:
 
-``` php artisan wsocket:serve
-```
+`php artisan wsocket:serve`
 
 You will need to keep that terminal window open, otherwise you will need to send it to backgroun process.
 

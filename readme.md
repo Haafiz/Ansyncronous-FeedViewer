@@ -19,7 +19,10 @@ As I am using `Sass` and I am using `ES6` constructs, so I am using Gulp for run
 # Usage:
 
 To run it you first need to run your HTTP server and then you need to run socket server using following command:
-`php artisan wsocket:serve`. You will need to keep that terminal window open, otherwise you will need to send it to backgroun process.
+
+`php artisan wsocket:serve`. 
+
+You will need to keep that terminal window open, otherwise you will need to send it to backgroun process.
 
 Then go to `http://{yourserverurl and path to project}/public`. Enter URL and hit enter or press `Fetch Feeds` button.
 
